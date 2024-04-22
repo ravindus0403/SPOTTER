@@ -60,6 +60,9 @@ st.markdown(f'<style>{custom_css}</style>', unsafe_allow_html=True)
 
 st.title("SPOTTER")
 
+# Add subtitle
+st.subheader("Digital Guardian Against SPAM Email/SMS")
+
 input_sms = st.text_area("Enter the message", height=200)
 
 if st.button('Predict') or (input_sms and input_sms.strip()):
