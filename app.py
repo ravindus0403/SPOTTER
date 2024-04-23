@@ -5,9 +5,14 @@ from nltk.corpus import stopwords
 import nltk
 from nltk.stem.porter import PorterStemmer
 from sklearn.feature_extraction.text import TfidfVectorizer
+import os
+
+# Pre-download NLTK data
+nltk_data_path = os.path.join(os.getcwd(), 'nltk_data')
+if not os.path.exists(nltk_data_path):
+    nltk.download('punkt', download_dir=nltk_data_path)
 
 ps = PorterStemmer()
-
 
 def transform_text(Content):
     Content = Content.lower()  # Lowercase
@@ -43,7 +48,7 @@ except FileNotFoundError:
 # Custom CSS for setting background image
 custom_css = """
     body {
-        background-image: url('https://i.postimg.cc/Hj1VNLqk/2.png');
+        background-image: url('https://app.gemoo.com/share/image-annotation/641000072215052288?codeId=MpO0Jm7qBNpBm&origin=imageurlgenerator&card=641000069337759744');
         background-size: cover;
     }
 """
@@ -85,5 +90,6 @@ if st.button('Predict') or (input_sms and input_sms.strip()):
         st.subheader("Additional Information:")
 
         # Precision score as a percentage
-        precision_score = model.predict_proba(vector_input)[:, 1][0] * 100
+        precision_score = model.predict_proba(vector_input)[0][1] * 100
         st.write(f"Precision Score: {precision_score:.2f}%")
+
