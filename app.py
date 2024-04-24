@@ -1,16 +1,14 @@
 import streamlit as st
 import pickle
 import string
-from nltk.corpus import stopwords
 import nltk
+from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 from sklearn.feature_extraction.text import TfidfVectorizer
-import os
 
-# Pre-download NLTK data
-nltk_data_path = os.path.join(os.getcwd(), 'nltk_data')
-if not os.path.exists(nltk_data_path):
-    nltk.download('punkt', download_dir=nltk_data_path)
+# Download NLTK data (only needs to be done once)
+nltk.download('punkt')
+nltk.download('stopwords')
 
 ps = PorterStemmer()
 
@@ -41,7 +39,8 @@ except FileNotFoundError:
 
 # Load the model from the saved file
 try:
-    model = pickle.load(open('Model.pkl', 'rb'))
+    with open('Model.pkl', 'rb') as file:
+        model = pickle.load(file)
 except FileNotFoundError:
     st.error("Model file not found. Please ensure it exists.")
 
@@ -90,6 +89,5 @@ if st.button('Predict') or (input_sms and input_sms.strip()):
         st.subheader("Additional Information:")
 
         # Precision score as a percentage
-        precision_score = model.predict_proba(vector_input)[0][1] * 100
+        precision_score = model.predict_proba(vector_input)[:, 1][0] * 100
         st.write(f"Precision Score: {precision_score:.2f}%")
-
