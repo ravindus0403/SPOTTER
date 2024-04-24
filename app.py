@@ -1,14 +1,14 @@
 import streamlit as st
 import pickle
 import string
-import nltk
 from nltk.corpus import stopwords
+import nltk
 from nltk.stem.porter import PorterStemmer
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-# Download NLTK data (only needs to be done once)
-nltk.download('punkt')
+# Initialize NLTK
 nltk.download('stopwords')
+nltk.download('punkt')
 
 ps = PorterStemmer()
 
@@ -39,16 +39,19 @@ except FileNotFoundError:
 
 # Load the model from the saved file
 try:
-    with open('Model.pkl', 'rb') as file:
-        model = pickle.load(file)
+    model = pickle.load(open('Model.pkl', 'rb'))
 except FileNotFoundError:
     st.error("Model file not found. Please ensure it exists.")
 
 # Custom CSS for setting background image
 custom_css = """
-    body {
-        background-image: url('https://app.gemoo.com/share/image-annotation/641000072215052288?codeId=MpO0Jm7qBNpBm&origin=imageurlgenerator&card=641000069337759744');
-        background-size: cover;
+   
+    .logo {
+        display: block;
+        margin-left: 5x;
+        margin-right: 5x;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
 """
 
@@ -61,6 +64,10 @@ st.set_page_config(
 
 # Inject custom CSS
 st.markdown(f'<style>{custom_css}</style>', unsafe_allow_html=True)
+
+# Logo image
+st.image("D:\Ravindu\Lecture Series\Projects\SPOTTER\logo.png")
+
 
 st.title("SPOTTER")
 
