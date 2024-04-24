@@ -66,7 +66,7 @@ st.set_page_config(
 st.markdown(f'<style>{custom_css}</style>', unsafe_allow_html=True)
 
 # Logo image
-st.image("D:\Ravindu\Lecture Series\Projects\SPOTTER\logo.png")
+st.image("D:\Ravindu\Lecture Series\Projects\SPOTTER\Logo.png")
 
 
 st.title("SPOTTER")
