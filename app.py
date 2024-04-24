@@ -48,8 +48,8 @@ custom_css = """
    
     .logo {
         display: block;
-        margin-left: 5x;
-        margin-right: 5x;
+        margin-left: 5px;
+        margin-right: 5px;
         padding-top: 5px;
         padding-bottom: 5px;
     }
